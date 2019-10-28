@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript in HTML</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.8/processing.min.js"></script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var processing = new Processing(canvas, function(processing) {
+            processing.size(999, 599);
+            processing.background(0xFFF);
+    
+            var mouseIsPressed = false;
+            processing.mousePressed = function () { mouseIsPressed = true; };
+            processing.mouseReleased = function () { mouseIsPressed = false; };
+    
+            var keyIsPressed = false;
+            processing.keyPressed = function () { keyIsPressed = true; };
+            processing.keyReleased = function () { keyIsPressed = false; };
+    
+            function getImage(s) {
+                var url = "https://www.kasandbox.org/programming-images/" + s + ".png";
+                processing.externals.sketch.imageCache.add(url);
+                return processing.loadImage(url);
+            }
+    
+            with (processing) {
+                
+                
+                var xPositions = [0];
+var yPositions = [0];
+var colour = [0];
+var x = [];
+var y = [];
+var j = 0;
+var colour2 = [];
+draw = function() {
+    background(204, 247, 255);
+mousePressed = function(){
+     x[j] = mouseX;
+     y[j] = mouseY;
+     
+     
+    };
+    if(y[j]>height+50){
+        j++;}
+        else if(y[j]<height+50){
+      fill(colour[j],colour[j],colour[j]);
+    
+         ellipse(x[j],y[j],10,10);
+          y[j]+=5;   
+     }
+         
+    mouseReleased = function(){
+    x.push();
+    y.push();
+       
+   
+    colour2.push(random(0,255));
+   
+    
+    };
+    for (var i = 0; i < xPositions.length; i++) {
+        noStroke();
+        fill(colour[i], colour[i], colour[i]);
+        ellipse(xPositions[i], yPositions[i], 10, 10);
+        yPositions[i] += 5;
+    
+        if(yPositions[i] === 10){//value 10 or higher by 5 to decrease rain drop(15,20 etc)
+             xPositions.push(random(1,999));
+             yPositions.push(0);
+        }
+            }
+   colour.push(random(0,250));
+};
+
+                
+                
+            }
+            if (typeof draw !== 'undefined') processing.draw = draw;
+        });
+    </script>
+</body>
+</html>
